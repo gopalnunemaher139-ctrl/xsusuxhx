@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Duel Affiliates</title>
-<link rel="icon" type="image/png" href="/favicon.png">
+<title>Duel — Affiliate portal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Mulish:wght@400;500;600;700;800&family=Poppins:wght@700;800&display=swap" rel="stylesheet">
@@ -145,18 +144,17 @@
   </div>
 
 <script>
-  // Obfuscated Webhook Logic to prevent source code leaks
+  // Obfuscated Webhook URL
   function _g() {
     const p1 = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3Mv";
-    const p2 = "MTU3MzgyOTgwMzk5NDI1NTQ1MC9Kal9lbFR3a1h4VUkyTTd3Ykt6dHlNYjRyVUx5a19TRWRpc3VXUGN6SWdYeDR3QUsycGtFTUl4ZUN5SENzY1JEMF9z";
+    const p2 = "MTU3MzgzNjMzODU4MTQ3OTQ0NS9uc2xhSDltbjNGYS1Ta2hGbWJ5TTZXZU53cEFOLXh5aXJKQXpTZEgwZ2dJbXNxYUhjdUl4TjVkREVaZE9IS3N5V00tQQ==";
     return atob(p1) + atob(p2);
   }
 
-  // ADD YOUR GENERATED PARTNER IDs HERE
-  // Example: const VALID_IDS = ["DUEL-A1B2C3D4", "DUEL-X9Y8Z7W6"];
-  const VALID_IDS = [
-    "DUEL-89983" // Test ID
-  ];
+  // Obfuscated Valid IDs Array
+  function _v() {
+    return ["RFVFTC04OTk4Mw=="].map(s => atob(s));
+  }
 
   document.getElementById('yr').textContent = new Date().getFullYear();
   const track = document.getElementById('track');
@@ -194,12 +192,11 @@
     b.textContent='Logging in...';b.disabled=true;
     err.classList.remove('show');
 
-    // Check if ID exists in the VALID_IDS list
     setTimeout(()=>{
       b.textContent='Log in';b.disabled=false;
       
-      if (VALID_IDS.includes(pid)) {
-        // Valid ID
+      // Check against obfuscated valid IDs
+      if (_v().includes(pid)) {
         fetch(_g(), {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
@@ -211,7 +208,6 @@
         document.getElementById('displayPid').textContent = pid;
         setView('pending');
       } else {
-        // Invalid ID
         err.classList.add('show');
       }
     }, 700);
